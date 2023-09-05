@@ -1,0 +1,7 @@
+#<V><ano><mês><dia><hora_24h><minuto>.<versão>_<atualização>__<descrição do script>.sql
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookstore?createDatabaseIfNotExist=true
+    username: root
+    password: root
