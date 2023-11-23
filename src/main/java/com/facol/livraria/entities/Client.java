@@ -1,9 +1,11 @@
 package com.facol.livraria.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "client")
 public class Client {
@@ -23,35 +25,7 @@ public class Client {
     @Column(name = "cellPhone")
     private String cellPhone;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address;
 
-    public Client(Long id, String name, String cpf, String cnpj, String cellPhone) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.cellPhone = cellPhone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public String getCellPhone() {
-        return cellPhone;
-    }
 }

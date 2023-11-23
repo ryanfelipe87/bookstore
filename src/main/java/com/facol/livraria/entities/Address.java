@@ -1,7 +1,9 @@
 package com.facol.livraria.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "address")
 public class Address {
@@ -10,86 +12,38 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
+    @Column(name = "zip_code")
     private String zipCode;
 
+    @Column(name = "public_place")
     private String publicPlace;
 
+    @Column(name = "complement")
     private String complement;
 
+    @Column(name = "neighborhood")
     private String neighborhood;
 
+    @Column(name = "locality")
     private String locality;
 
+    @Column(name = "uf")
     private String uf;
 
+    @Column(name = "gia")
     private String gia;
 
+    @Column(name = "ddd")
     private String ddd;
 
+    @Column(name = "siafi")
     private String siafi;
 
+    @Column(name = "ibge")
+    private String ibge;
+
     @ManyToOne
-    @JoinColumn(name = "client_fk", nullable=false)
+    @JoinColumn(name = "client_fk")
     private Client client;
 
-    public Address(Long id, String zipCode, String publicPlace, String complement, String neighborhood, String locality, String uf, String gia, String ddd, String siafi) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.zipCode = zipCode;
-        this.publicPlace = publicPlace;
-        this.complement = complement;
-        this.neighborhood = neighborhood;
-        this.locality = locality;
-        this.uf = uf;
-        this.gia = gia;
-        this.ddd = ddd;
-        this.siafi = siafi;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getPublicPlace() {
-        return publicPlace;
-    }
-
-    public String getComplement() {
-        return complement;
-    }
-
-    public String getNeighborhood() {
-        return neighborhood;
-    }
-
-    public String getLocality() {
-        return locality;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public String getGia() {
-        return gia;
-    }
-
-    public String getDdd() {
-        return ddd;
-    }
-
-    public String getSiafi() {
-        return siafi;
-    }
 }
