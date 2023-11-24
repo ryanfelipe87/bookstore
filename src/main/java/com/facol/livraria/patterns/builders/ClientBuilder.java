@@ -1,4 +1,4 @@
-package com.facol.livraria.builders;
+package com.facol.livraria.patterns.builders;
 
 import com.facol.livraria.entities.Client;
 
