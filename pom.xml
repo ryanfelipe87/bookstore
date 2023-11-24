@@ -11,8 +11,8 @@
 	<groupId>com.facol</groupId>
 	<artifactId>livraria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>livraria</name>
-	<description>Demo project for Spring Boot</description>
+	<name>bookstore</name>
+	<description>Project of BookStore in matter of Programming IV</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
