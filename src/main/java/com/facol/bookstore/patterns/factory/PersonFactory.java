@@ -7,6 +7,8 @@ import com.facol.bookstore.entities.Client;
 import com.facol.bookstore.patterns.adapter.RequestExternal;
 import com.facol.bookstore.patterns.adapter.viacep.ViaCep;
 import com.facol.bookstore.patterns.adapter.viacep.ViaCepAdapter;
+import com.facol.bookstore.patterns.mapper.ClientWithCnpjMapper;
+import com.facol.bookstore.patterns.mapper.ClientWithCpfMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 

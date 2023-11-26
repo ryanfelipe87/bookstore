@@ -1,6 +1,5 @@
 package com.facol.bookstore.dtos;
 
-import com.facol.bookstore.entities.Address;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +17,7 @@ public class ClientDto {
     private String cnpj;
     private String cellPhone;
     @Setter
-    private List<Address> addresses;
+    private List<AddressDto> address;
     private String cep;
     @Setter
     private ExternalAddressDto externalAddressDto;

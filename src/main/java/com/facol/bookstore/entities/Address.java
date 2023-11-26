@@ -1,10 +1,16 @@
 package com.facol.bookstore.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "address")
 public class Address {
 
@@ -45,5 +51,6 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "client_fk")
     private Client client;
+
 
 }
