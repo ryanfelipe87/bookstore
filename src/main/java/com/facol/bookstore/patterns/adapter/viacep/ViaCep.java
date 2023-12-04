@@ -1,6 +1,7 @@
 package com.facol.bookstore.patterns.adapter.viacep;
 
 import com.facol.bookstore.dtos.ExternalAddressDto;
+import com.facol.bookstore.exceptions.GenericNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
