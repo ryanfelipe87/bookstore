@@ -5,8 +5,8 @@ import com.facol.bookstore.entities.Book;
 import com.facol.bookstore.entities.Client;
 import com.facol.bookstore.patterns.factory.Person;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ClientBuilder extends Person {
 
@@ -15,9 +15,15 @@ public class ClientBuilder extends Person {
     private String cpf;
     private String cnpj;
     private String cellPhone;
+
+    private Double amountMoney;
     private List<Address> address;
 
-    private Set<Book> booksPurchased;
+    private List<Book> booksPurchased;
+
+    public ClientBuilder(){
+        this.booksPurchased = new ArrayList<>();
+    }
 
     public ClientBuilder id(Long id){
         this.id = id;
@@ -44,17 +50,22 @@ public class ClientBuilder extends Person {
         return this;
     }
 
+    public ClientBuilder amountMoney(Double amountMoney){
+        this.amountMoney = amountMoney;
+        return this;
+    }
+
     public ClientBuilder address(List<Address> address){
         this.address = address;
         return this;
     }
 
-    public ClientBuilder booksPurchased(Set<Book> booksPurchased){
+    public ClientBuilder booksPurchased(List<Book> booksPurchased){
         this.booksPurchased = booksPurchased;
         return this;
     }
 
     public Client build(){
-        return new Client(id, name, cpf, cnpj, cellPhone, address, booksPurchased);
+        return new Client(id, name, cpf, cnpj, cellPhone, amountMoney, address, booksPurchased);
     }
 }

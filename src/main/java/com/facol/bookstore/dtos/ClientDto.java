@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -17,11 +16,12 @@ public class ClientDto {
     private String cpf;
     private String cnpj;
     private String cellPhone;
+    private Double amountMoney;
     @Setter
     private List<AddressDto> address;
     private String cep;
     @Setter
     private ExternalAddressDto externalAddressDto;
     @Setter
-    private Set<BookDto> booksPurchased;
+    private List<BookDto> booksPurchased;
 }

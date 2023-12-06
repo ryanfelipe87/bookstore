@@ -33,6 +33,7 @@ public class ClientControllerTest {
                 .cpf("243.922.740-47")
                 .name("Neymar Jr")
                 .cellPhone("(68) 99445-2451")
+                .amountMoney(100.00)
                 .build();
     }
 
@@ -43,6 +44,7 @@ public class ClientControllerTest {
                 .cnpj("41.350.854/0001-85")
                 .name("Mbappé")
                 .cellPhone("(68) 99445-2451")
+                .amountMoney(100.00)
                 .cep("55606195")
                 .build();
 
@@ -61,6 +63,7 @@ public class ClientControllerTest {
                 .cnpj("")
                 .name("Bellingham")
                 .cellPhone("(68) 99445-2451")
+                .amountMoney(100.00)
                 .cep("55606195")
                 .build();
 

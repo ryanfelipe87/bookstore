@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -33,6 +32,9 @@ public class Client {
     @Column(name = "cellPhone")
     private String cellPhone;
 
+    @Column(name = "amount_money")
+    private Double amountMoney;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address;
 
@@ -42,6 +44,6 @@ public class Client {
             joinColumns = @JoinColumn(name = "client_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    private Set<Book> booksPurchased = new HashSet<>();
+    private List<Book> booksPurchased = new ArrayList<>();
 }
 

@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,5 +31,5 @@ public class Book {
     private int amount;
 
     @ManyToMany(mappedBy = "booksPurchased")
-    private Set<Client> clientsPurchased = new HashSet<>();
+    private List<Client> clientsPurchased = new ArrayList<>();
 }

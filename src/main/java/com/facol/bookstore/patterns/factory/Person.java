@@ -7,4 +7,5 @@ public class Person {
     public String cpf;
     public String cnpj;
     public String cellPhone;
+    public Double amountMoney;
 }
