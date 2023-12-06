@@ -17,6 +17,7 @@ import com.facol.bookstore.services.utils.SendServiceUtils;
 import com.facol.bookstore.services.utils.StockServiceUtils;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,15 +28,15 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
-    private Logger logger = LoggerSingleton.getLogger();
     private ClientRepository clientRepository;
     private ClientWithCnpjMapper clientCnpj;
     private ClientWithCpfMapper clientCpf;
     private ClientToClientDtoMapper mapperClientDto;
     private ClientDtoToClientMapper mapperClient;
     private StockServiceUtils stockServiceUtils;
-    private PaymentServiceUtils paymentServiceUtils;
     private SendServiceUtils sendServiceUtils;
+    private PaymentServiceUtils paymentServiceUtils;
+
 
     @Override
     public void create(ClientDto clientDto) {
@@ -85,11 +86,11 @@ public class ClientServiceImpl implements ClientService {
                 sendServiceUtils.sendBook(clientDto, bookDto);
                 return true;
             }else{
-                logger.info("Payment not confirmed. The purchase will not be completed.");
+                System.out.println("Payment not confirmed. The purchase will not be completed.");
                 return false;
             }
         }else{
-            logger.info("The book is not available. The purchase will not be completed.");
+            System.out.println("The book is not available. The purchase will not be completed.");
             return false;
         }
     }

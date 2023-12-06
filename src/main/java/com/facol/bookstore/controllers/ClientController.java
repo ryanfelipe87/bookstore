@@ -10,13 +10,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-@RestController
-@RequestMapping(path = "/client")
+@Controller
 @Tag(name = "Client")
 public class ClientController {
 
@@ -28,7 +29,7 @@ public class ClientController {
         this.logger = logger;
     }
 
-    @PostMapping
+    @PostMapping("/client")
     @Operation(
             summary = "Create a new client",
             description = "Controller for a Client")
@@ -38,11 +39,13 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<Void> create(@RequestBody ClientDto clientDto){
+    public String create(@RequestBody ClientDto clientDto, Model model){
         logger.info("Creating a new user...");
         service.create(clientDto);
         logger.info("New user created.");
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        new ResponseEntity<Void>(HttpStatus.CREATED);
+        model.addAttribute("client", clientDto);
+        return "client";
     }
 
     @PostMapping(path = "/purchase")
@@ -55,19 +58,21 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<String> makePurchase(@RequestBody BookDto bookDto){
+    public String makePurchase(@RequestBody BookDto bookDto, Model model){
         ClientDto clientDto = getCustomerInfo();
 
         boolean purchaseSuccessfully = service.makePurchase(clientDto, bookDto);
 
         if(purchaseSuccessfully){
-            return ResponseEntity.ok("Purchase made successfully.");
+            logger.info("Purchase made successfully.");
         }else{
-            return ResponseEntity.badRequest().body("Purchase failed. Check details and try again.");
+            logger.info("Purchase failed. Check details and try again.");
         }
+        model.addAttribute("purchase", bookDto);
+        return "/purchase";
     }
 
-    @GetMapping
+    @GetMapping("/client")
     @Operation(
             summary = "List all Clients",
             description = "Controller for a Client")
@@ -77,14 +82,16 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<List<ClientDto>> listAll(){
+    public String listAll(Model model){
         logger.info("Listing all users...");
         List<ClientDto> clients = service.listAll();
         logger.info("Complete listing.");
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+        new ResponseEntity<>(clients, HttpStatus.OK);
+        model.addAttribute("client", clients);
+        return "/client";
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/client/{id}")
     @Operation(
             summary = "Find Client by id",
             description = "Controller for a Client")
@@ -94,14 +101,16 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<ClientDto> getById(@PathVariable Long id){
+    public String getById(@PathVariable Long id, Model model){
         logger.info("Listing users by id...");
         ClientDto clientDto = service.getById(id);
         logger.info("List of users by id complete.");
-        return new ResponseEntity<>(clientDto, HttpStatus.OK);
+        new ResponseEntity<>(clientDto, HttpStatus.OK);
+        model.addAttribute("client", clientDto);
+        return "/client";
     }
 
-    @PutMapping
+    @PutMapping("/client/{id}")
     @Operation(
             summary = "Update Client",
             description = "Controller for a Client")
@@ -111,14 +120,16 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<Void> update(@RequestBody ClientDto clientDto){
+    public String update(@RequestBody ClientDto clientDto, Model model){
         logger.info("Updating a new user...");
         service.update(clientDto);
         logger.info("User has been updated.");
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        new ResponseEntity<Void>(HttpStatus.CREATED);
+        model.addAttribute("client", clientDto);
+        return "/client";
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/client/{id}")
     @Operation(
             summary = "Delete Client",
             description = "Controller for a Client")
@@ -128,11 +139,13 @@ public class ClientController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id, Model model){
         logger.info("Removing user...");
         service.deleteClient(id);
         logger.info("User removed successfully.");
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        model.addAttribute("client");
+        return "/client";
     }
 
     private ClientDto getCustomerInfo(){
