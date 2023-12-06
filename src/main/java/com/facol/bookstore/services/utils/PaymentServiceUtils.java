@@ -4,7 +4,6 @@ import com.facol.bookstore.dtos.BookDto;
 import com.facol.bookstore.dtos.ClientDto;
 import com.facol.bookstore.exceptions.GenericNotFoundException;
 import com.facol.bookstore.patterns.singleton.LoggerSingleton;
-import com.facol.bookstore.services.ClientService;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -20,12 +19,13 @@ public class PaymentServiceUtils {
         this.logger = logger;
     }
 
-    public void paymentProcess(ClientDto clientDto, BookDto bookDto){
+    public boolean verifyPayment(ClientDto clientDto, BookDto bookDto){
         double priceBook = calculatorPriceBook(bookDto);
         double valuePay = valuePayForClient(clientDto);
 
         if(valuePay >= priceBook){
             logger.info("Payment accept. Purchased book by: " + clientDto.getName());
+            return true;
         }else{
             throw new GenericNotFoundException("Insufficient payment.");
         }
