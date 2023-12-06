@@ -1,5 +1,6 @@
 package com.facol.bookstore.controllers;
 
+import com.facol.bookstore.dtos.BookDto;
 import com.facol.bookstore.dtos.ClientDto;
 import com.facol.bookstore.patterns.singleton.LoggerSingleton;
 import com.facol.bookstore.services.ClientService;
@@ -28,6 +29,19 @@ public class ClientController {
         service.create(clientDto);
         logger.info("New user created.");
         return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/purchase")
+    public ResponseEntity<String> makePurchase(@RequestBody BookDto bookDto){
+        ClientDto clientDto = getCustomerInfo();
+
+        boolean purchaseSuccessfully = service.makePurchase(clientDto, bookDto);
+
+        if(purchaseSuccessfully){
+            return ResponseEntity.ok("Purchase made successfully.");
+        }else{
+            return ResponseEntity.badRequest().body("Purchase failed. Check details and try again.");
+        }
     }
 
     @GetMapping
@@ -60,5 +74,19 @@ public class ClientController {
         service.deleteClient(id);
         logger.info("User removed successfully.");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private ClientDto getCustomerInfo(){
+        ClientDto clientDto = new ClientDto();
+        clientDto.getId();
+        clientDto.getName();
+        clientDto.getCpf();
+        clientDto.getCnpj();
+        clientDto.getAmountMoney();
+        clientDto.getCellPhone();
+        clientDto.getCep();
+        clientDto.getAddress();
+
+        return clientDto;
     }
 }
