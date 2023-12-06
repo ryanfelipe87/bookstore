@@ -16,5 +16,6 @@ public class BookDto {
     private String title;
     private String author;
     private int amount;
+    private double price;
     private List<ClientDto> clientsPurchased;
 }

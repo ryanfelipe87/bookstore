@@ -69,6 +69,7 @@ public class ClientWithCpfMapper implements Mapper<ClientDto, Client> {
         book.setTitle(bookDto.getTitle());
         book.setAuthor(bookDto.getAuthor());
         book.setAmount(bookDto.getAmount());
+        book.setPrice(bookDto.getPrice());
 
         return book;
     }

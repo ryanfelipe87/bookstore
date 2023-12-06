@@ -8,4 +8,5 @@ public class Person {
     public String cnpj;
     public String cellPhone;
     public Double amountMoney;
+    public double price;
 }

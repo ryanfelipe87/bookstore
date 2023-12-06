@@ -71,6 +71,7 @@ public class ClientToClientDtoMapper implements Mapper<Client, ClientDto> {
         bookDto.setTitle(book.getTitle());
         bookDto.setAuthor(book.getAuthor());
         bookDto.setAmount(book.getAmount());
+        bookDto.setPrice(book.getPrice());
 
         return bookDto;
     }

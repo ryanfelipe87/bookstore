@@ -30,6 +30,9 @@ public class Book {
     @Column
     private int amount;
 
+    @Column
+    private double price;
+
     @ManyToMany(mappedBy = "booksPurchased")
     private List<Client> clientsPurchased = new ArrayList<>();
 }
