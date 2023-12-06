@@ -4,6 +4,10 @@ import com.facol.bookstore.dtos.BookDto;
 import com.facol.bookstore.dtos.ClientDto;
 import com.facol.bookstore.patterns.singleton.LoggerSingleton;
 import com.facol.bookstore.services.ClientService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping(path = "/client")
+@Tag(name = "Client")
 public class ClientController {
 
     private Logger logger = LoggerSingleton.getLogger();
@@ -24,6 +29,15 @@ public class ClientController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Create a new client",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<Void> create(@RequestBody ClientDto clientDto){
         logger.info("Creating a new user...");
         service.create(clientDto);
@@ -32,6 +46,15 @@ public class ClientController {
     }
 
     @PostMapping(path = "/purchase")
+    @Operation(
+            summary = "Make a new purchase",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<String> makePurchase(@RequestBody BookDto bookDto){
         ClientDto clientDto = getCustomerInfo();
 
@@ -45,6 +68,15 @@ public class ClientController {
     }
 
     @GetMapping
+    @Operation(
+            summary = "List all Clients",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<List<ClientDto>> listAll(){
         logger.info("Listing all users...");
         List<ClientDto> clients = service.listAll();
@@ -53,6 +85,15 @@ public class ClientController {
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(
+            summary = "Find Client by id",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<ClientDto> getById(@PathVariable Long id){
         logger.info("Listing users by id...");
         ClientDto clientDto = service.getById(id);
@@ -61,6 +102,15 @@ public class ClientController {
     }
 
     @PutMapping
+    @Operation(
+            summary = "Update Client",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<Void> update(@RequestBody ClientDto clientDto){
         logger.info("Updating a new user...");
         service.update(clientDto);
@@ -69,6 +119,15 @@ public class ClientController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(
+            summary = "Delete Client",
+            description = "Controller for a Client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful request."),
+            @ApiResponse(responseCode = "400", description = "Invalid request due to pre-defined validations."),
+            @ApiResponse(responseCode = "404", description = "Resource not found."),
+            @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
+    })
     public ResponseEntity<Void> delete(@PathVariable Long id){
         logger.info("Removing user...");
         service.deleteClient(id);
