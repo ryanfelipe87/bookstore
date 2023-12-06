@@ -1,10 +1,12 @@
 package com.facol.bookstore.patterns.builders;
 
 import com.facol.bookstore.entities.Address;
+import com.facol.bookstore.entities.Book;
 import com.facol.bookstore.entities.Client;
 import com.facol.bookstore.patterns.factory.Person;
 
 import java.util.List;
+import java.util.Set;
 
 public class ClientBuilder extends Person {
 
@@ -14,6 +16,8 @@ public class ClientBuilder extends Person {
     private String cnpj;
     private String cellPhone;
     private List<Address> address;
+
+    private Set<Book> booksPurchased;
 
     public ClientBuilder id(Long id){
         this.id = id;
@@ -45,7 +49,12 @@ public class ClientBuilder extends Person {
         return this;
     }
 
+    public ClientBuilder booksPurchased(Set<Book> booksPurchased){
+        this.booksPurchased = booksPurchased;
+        return this;
+    }
+
     public Client build(){
-        return new Client(id, name, cpf, cnpj, cellPhone, address);
+        return new Client(id, name, cpf, cnpj, cellPhone, address, booksPurchased);
     }
 }
