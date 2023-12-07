@@ -25,16 +25,19 @@
             font-size: 18px;
             padding: 15px 30px;
         }
+
     </style>
 </head>
 <body>
 <div class="container">
     <h2 class="mb-4">Bem-vindo à Livraria</h2>
-    <div>
-        <a href="/client" class="btn btn-primary btn-option">Cadastrar Cliente</a>
-        <a href="/books" class="btn btn-success btn-option">Cadastrar Livro</a>
-        <a href="/purchase" class="btn btn-info btn-option">Comprar Livro</a>
-    </div>
+    <form th:object="${indexController}" th:action="@{/}" method="post">
+        <div>
+            <a href="/client" class="btn btn-primary btn-option">Cadastrar Cliente</a>
+            <a href="/books" class="btn btn-success btn-option">Cadastrar Livro</a>
+            <a href="/purchase" class="btn btn-info btn-option">Comprar Livro</a>
+        </div>
+    </form>
 </div>
 </body>
 </html>

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ClientService {
 
-    void create(ClientDto clientDto);
+    ClientDto create(ClientDto clientDto);
 
     List<ClientDto> listAll();
 

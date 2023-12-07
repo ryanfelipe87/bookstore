@@ -3,7 +3,7 @@ package com.facol.bookstore.controllers;
 import com.facol.bookstore.dtos.BookDto;
 import com.facol.bookstore.dtos.ClientDto;
 import com.facol.bookstore.patterns.singleton.LoggerSingleton;
-import com.facol.bookstore.services.ClientService;
+import com.facol.bookstore.services.impl.ClientServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,9 +22,9 @@ import java.util.logging.Logger;
 public class ClientController {
 
     private Logger logger = LoggerSingleton.getLogger();
-    private final ClientService service;
+    private final ClientServiceImpl service;
 
-    public ClientController(ClientService service, Logger logger){
+    public ClientController(ClientServiceImpl service, Logger logger){
         this.service = service;
         this.logger = logger;
     }

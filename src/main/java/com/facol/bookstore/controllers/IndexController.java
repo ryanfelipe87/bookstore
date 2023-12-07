@@ -21,7 +21,7 @@ public class IndexController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String intialPage(){
+    public String initialPage(){
         return "index";
     }
 }

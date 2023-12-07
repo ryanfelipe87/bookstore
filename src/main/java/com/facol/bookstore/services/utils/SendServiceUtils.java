@@ -10,22 +10,25 @@ import java.util.logging.Logger;
 @Service
 public class SendServiceUtils {
 
+    private Logger logger = LoggerSingleton.getLogger();
+
     private final PaymentServiceUtils paymentServiceUtils;
 
-    public SendServiceUtils(PaymentServiceUtils paymentServiceUtils){
+    public SendServiceUtils(PaymentServiceUtils paymentServiceUtils, Logger logger){
         this.paymentServiceUtils = paymentServiceUtils;
+        this.logger = logger;
     }
 
     public void sendBook(ClientDto clientDto, BookDto bookDto){
         if(paymentServiceUtils.verifyPayment(clientDto, bookDto)){
-            System.out.println("Payment confirmed. Book sent to address " + clientDto.getName() + " in " + clientDto.getAddress());
+            logger.info("Payment confirmed. Book sent to address " + clientDto.getName() + " in " + clientDto.getAddress());
             updateStatusSend(bookDto);
         }else{
-            System.out.println("Payment not confirmed. The book will not be sent.");
+            logger.info("Payment not confirmed. The book will not be sent.");
         }
     }
 
     private void updateStatusSend(BookDto bookDto){
-        System.out.println("The status of book was updated with ID: " + bookDto.getId());
+        logger.info("The status of book was updated with ID: " + bookDto.getId());
     }
 }
