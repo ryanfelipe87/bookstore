@@ -10,9 +10,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -27,7 +27,7 @@ public class BookController {
         this.logger = logger;
     }
 
-    @PostMapping("/books")
+    @PostMapping
     @Operation(
             summary = "Create a new book",
             description = "Controller for a Book")
@@ -37,14 +37,12 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String saveBook(@RequestBody BookDto bookDto, Model model){
+    public ResponseEntity<Void> saveBook(@RequestBody BookDto bookDto){
         service.createBook(bookDto);
-        new ResponseEntity<Void>(HttpStatusCode.valueOf(200));
-        model.addAttribute("books", bookDto);
-        return "/books";
+        return new ResponseEntity<Void>(HttpStatusCode.valueOf(200));
     }
 
-    @GetMapping("/books")
+    @GetMapping
     @Operation(
             summary = "List all books",
             description = "Controller for a Book")
@@ -54,10 +52,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String listAllBooks(Model model){
-        service.listAllBooks();
-        model.addAttribute("books");
-        return "/books";
+    public List<BookDto> listAllBooks(){
+        return service.listAllBooks();
     }
 
     @GetMapping("/{id}")
@@ -70,10 +66,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String findBookById(@PathVariable Long id, Model model){
-        service.finBookById(id);
-        model.addAttribute("books");
-        return "/books";
+    public BookDto findBookById(@PathVariable Long id){
+        return service.finBookById(id);
     }
 
     @PutMapping("/books/{id}")
@@ -86,10 +80,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String updateBook(@PathVariable Long id, @RequestBody BookDto bookDto, Model model){
-        service.updateBookById(id, bookDto);
-        model.addAttribute("books", bookDto);
-        return "/books";
+    public BookDto updateBook(@PathVariable Long id, @RequestBody BookDto bookDto){
+        return service.updateBookById(id, bookDto);
     }
 
     @DeleteMapping("/books/{id}")
@@ -102,9 +94,7 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Resource not found."),
             @ApiResponse(responseCode = "500", description = "Unidentified internal error on the server."),
     })
-    public String deleteBook(@PathVariable Long id, Model model){
+    public void deleteBook(@PathVariable Long id){
         service.deleteBook(id);
-        model.addAttribute("books");
-        return "/books";
     }
 }

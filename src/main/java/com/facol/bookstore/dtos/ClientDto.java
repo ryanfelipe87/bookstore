@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,11 +18,8 @@ public class ClientDto {
     private String cnpj;
     private String cellPhone;
     private Double amountMoney;
-    @Setter
     private List<AddressDto> address;
     private String cep;
-    @Setter
     private ExternalAddressDto externalAddressDto;
-    @Setter
     private List<BookDto> booksPurchased;
 }

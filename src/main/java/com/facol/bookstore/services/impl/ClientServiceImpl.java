@@ -47,8 +47,8 @@ public class ClientServiceImpl implements ClientService {
 
             return clientDto;
         }catch (Exception e){
-            logger.warning("Create a new client error.");
-            throw new GenericNotFoundException("Create a new client error.");
+            logger.warning("Error in create a new user.");
+            throw new GenericNotFoundException("Error in create a new user.");
         }
     }
     @Transactional

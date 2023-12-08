@@ -22,6 +22,7 @@ public class PaymentServiceUtils {
         double valuePay = valuePayForClient(clientDto);
 
         if(valuePay >= priceBook){
+            clientDto.setAmountMoney(clientDto.getAmountMoney() - priceBook);
             logger.info("Payment accept. Purchased book by: " + clientDto.getName());
             return true;
         }else{
